@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="d3/d3.js"></script>
+        <style type="text/css">
+            div.bar {
+                display: inline-block;
+                width: 20px;
+                height: 75px;
+                margin-right: 2px;
+                background-color: #62A8E5;           
+            }
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var dataset = [10, 15, 20, 25, 30]
+            // var dataset = [];
+                    // for loop template: 
+                    // for (initialization; test condition; iteration statement){
+                    //   Statement(s) to be executed if test condition is true
+                    // }
+
+            // for ( var i = 0; i <= 20 ; i ++) {
+            //     var newNumber = Math.round(Math.random() * 30);      //New random number (0-30)
+            //     dataset.push(newNumber);             //Add new number to array
+            // }                                         
+
+            // d3.select("body").selectAll("div")
+            //     .data(dataset)
+            //     .enter()
+            //     .append('div')
+            //     .attr("class", "bar")
+            //     .style("height", function(d) {
+            //         var barheight = d * 5
+            //         return barheight + "px";
+            //     });
+
+            var w = 500;
+            var h = 500;
+
+            var svg = d3.select('body')                // why don't we have .selectAll('svg')????
+                .append('svg')
+                .attr("width", w)
+                .attr("height", h);
+
+            var circles = svg.selectAll('circle')
+                .data(dataset)
+                .enter()
+                .append('circle');
+
+            circles.attr('cx', function(d, i) {
+                return (i * 90) + d;
+            })
+                .attr('cy', h/10)
+                .attr('r', function(d) {
+                    return d
+                })
+                .attr('fill', 'orange')
+                .attr('stroke', 'red')
+                .attr('stroke-width', function(d) {
+                    return d/2
+                });
+
+            // d3.select("body").selectAll("p")
+            //     .data(dataset)
+            //     .enter()
+            //     .append('p')
+            //     .text(function (d) { 
+            //         return "this number: " + d; 
+            //     })
+            //     .style("color", function(d){
+            //         if (d > 30) {
+            //             return "blue";
+            //         } else {
+            //             return "black";
+            //         }
+            //     });
+        </script>
+        
+    </body>
+</html>
