@@ -14,8 +14,7 @@
 		for (i = 0 ; i <= 50 ; i ++) {
 			var newXCoor = Math.round(Math.random() * 500);
 			var newYCoor = Math.round(Math.random() * 500);
-			var newCoor = [newXCoor, newYCoor];
-			dataset.push(newCoor);
+			dataset.push([newXCoor, newYCoor]);
 		}
 
 		var w = 1000;
@@ -49,9 +48,9 @@
 				return d[0] + ", " + d[1];
 			})
 			.attr("x", function(d) {return d[0]})
-			.attr("y", function(d) {return d[1]})
+			.attr("y", function(d) {return d[1]})			
 			.attr("fill", "blue")
-			.attr("font-size", "11px")
+			.attr("font-size", "9px")
 			.attr("font-family", "Rockwell")
 	</script>
 
