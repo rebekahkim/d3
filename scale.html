@@ -23,16 +23,19 @@
 			dataset.push([newXCoor, newYCoor]);
 		}
 
-		dataset.push([50, 50]);
+		dataset.push([0, 50]);
 
 		var xScale = d3.scale.linear()
 							.domain([d3.min(dataset, function(d) {return d[0];}), d3.max(dataset, function(d) {return d[0];})])
-							.rangeRound([padding, w - padding]);
+							.rangeRound([padding, w - padding])
+							.clamp(true);                	  //forces all output values to be within specified range- excessive values 									rounded to highest/lowest value
 							// .nice();
 
 		var yScale = d3.scale.linear()
 							.domain([d3.min(dataset, function(d) {return d[1];}), d3.max(dataset, function(d) {return d[1]; })])
-							.rangeRound([padding , h - padding]);
+							.rangeRound([padding , h - padding])
+							.clamp(true);
+
 							// .range([0, h]);
 							// .nice();
 

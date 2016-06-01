@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<meta charset="UTF-8">
+	<title>Axis in D3</title>
+	<style type="text/css">
+		.axis path,
+		.axis line {
+			fill: none;						/* Since styling SVG element, SVG attr names should be used not CSS like 'color'*/
+			stroke: red;
+			shape-rendering: crispEdges;
+		}
+		.axis text {
+			font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
+			font-size: 11px;
+		}
+
+	</style>
+	<script type="text/javascript" src="d3/d3.js"></script>
+</head>
+
+<body>
+	<script type="text/javascript">
+		var w = 500;
+		var h = 300;
+
+		var padding = 30;
+
+		var dataset = [];
+		var numOfData = 20;
+		var maxNumber = 500
+
+		for (var i = 0; i <= numOfData ; i++) {
+			var newXCoor = Math.floor(Math.random() * maxNumber);
+			var newYCoor = Math.floor(Math.random() * maxNumber);
+			dataset.push([newXCoor, newYCoor]);
+		}
+
+		// Used below to "debug"- more like learn about my ignorance about cy's...
+		// var dataset = [
+		// 					[5, 20],
+		// 					[410, 12], 
+		// 					[600, 150]
+						  // ];
+
+
+		var xScale = d3.scale.linear()
+							// .domain([d3.min(dataset, function(d) {return d[0];}), d3.max(dataset, function(d) {return d[0];})])
+							.domain([0, d3.max(dataset, function(d) { return d[0]; })])
+							.range([padding, w - padding * 2])
+							.clamp(true);                  //forces all output values to be within specified range- excessive values 									rounded to highest/lowest value
+							// .nice();
+
+		var yScale = d3.scale.linear()
+							// .domain([d3.min(dataset, function(d) {return d[1];}), d3.max(dataset, function(d) {return d[1]; })])
+							.domain([0, d3.max(dataset, function(d) { return d[1]; })])
+							// .rangeRound([padding , h - padding])
+							.range([h - padding, padding])
+							.clamp(true);
+							// .nice();
+
+		var rScale = d3.scale.linear()
+						.domain([0, d3.max(dataset, function(d) {return d[1]; })])
+						.range([2, 5]);
+
+		// Drawing the Axis
+		var xAxis = d3.svg.axis()
+						.scale(xScale)
+						.orient("bottom")
+						.ticks(5);
+
+		var yAxis = d3.svg.axis()
+							.scale(yScale)
+							.orient("left")
+							.ticks(6);
+
+
+		var svg = d3.select('body')
+					.append('svg')
+					.attr("width", w)
+					.attr("height", h);
+
+		svg.selectAll('circle')
+			.data(dataset)
+			.enter()
+			.append('circle')
+			.attr('fill', '#837bff')
+			.attr('cx', function(d) {
+				return xScale(d[0]);
+			})
+			.attr('cy', function(d) {					
+				return yScale(d[1]);
+			})
+			// on the console, it looks like y coord is incorrect b/c (0,0) start on top left- the text below will show the true coordinate y-point from the dataset which is d[1], a clean integer (cy is not the true value of d[1] because it's scaled and is telling the computer that it needs to draw the point 'cy' amount away from the top; that's why it seems like it's inverted because you're tricked to think cy = d[1]). Get the hint from cy values trailing with weird decimals, meaning they were messed with to scale correctly
+			.attr('r', function(d) {
+				return rScale(d[1]);
+			});
+
+
+		svg.selectAll('text')
+			.data(dataset)
+			.enter()
+			.append('text')
+			.text(function(d) {
+				// return xScale(d[0]) + ', ' + yScale(d[1]);	
+				// ^== if you put this line instead of below, it will invert circle's y coord and print in float
+				return d[0] + ", " + d[1];
+			})
+			.attr('x', function(d) {
+				return xScale(d[0]);
+			})
+			.attr('y', function(d) {
+				return yScale(d[1]);
+			})
+			.attr("fill", "black")
+			.attr("font-size", "9px")
+			.attr("font-family", "Rockwell");
+
+
+		
+		svg.append('g')				// Axis actually draws something to the screen (by appending SVG to DOM), so it needs to be 								// specified WHERE on DOM it will be. Appending new element g (which stands for group), which is 							// invisible and can 1) contain or group other elements and 2) apply transformations to.
+			.attr('transform', 'translate(0, ' + (h - padding) + ')')
+			.attr('class', 'axis')  // Assign axis class.
+			.call(xAxis);			// The call() function takes incoming selection (which is g here) and hands it off to another ftn						// (which is 'xAxis' here)- g is used to group all the crazy things that will be drawn on the axis.
+		svg.append('g')
+			.attr('class', 'axis')
+			.attr('transform', 'translate (' + padding + ', 0)')
+			.call(yAxis);
+
+
+
+
+
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
