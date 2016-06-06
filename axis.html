@@ -16,7 +16,9 @@
 			font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
 			font-size: 11px;
 		}
-
+		circle {
+			fill: #837bff;
+		}
 	</style>
 	<script type="text/javascript" src="d3/d3.js"></script>
 </head>
@@ -86,7 +88,7 @@
 			.data(dataset)
 			.enter()
 			.append('circle')
-			.attr('fill', '#837bff')
+			// .attr('fill', '#837bff')			// put up in the header CSS style
 			.attr('cx', function(d) {
 				return xScale(d[0]);
 			})

@@ -8,21 +8,27 @@
 	</head>
 	
 	<body>
-		<p> this is a paragraph </p>
+		<p> Click here to change the dataset </p>
 
 		<script type="text/javascript">
 			var w = 500;
 			var h = 300;
 
-			var dataset = [];
 
 			var numBars = 20;
-			var barRange = 40;
+			var barRange = 100;
 
-			for (i = 0 ; i <= numBars ; i++) {
-				var newNum = Math.floor((Math.random() * barRange));
-				dataset.push(newNum);
+			var dataset = [];
+
+			function newDataset() {
+
+				for (i = 0 ; i <= numBars ; i++) {
+					var newNum = Math.floor((Math.random() * barRange));
+					dataset.push(newNum);
+				}
 			}
+
+			newDataset();
 
 
 			var xScale = d3.scale.ordinal()
@@ -46,7 +52,7 @@
 					return xScale(i);
 				})
 				.attr('y' , function(d) {return h - yScale(d);} )
-				.attr('fill' , function(d) {return "rgb(" + (d * 6) + ", 0, 0)";})
+				.attr('fill' , function(d) {return "rgb(" + (d) * 3 + ", 0, 0)";})
 				.attr('height', function(d) {return yScale(d);})
 				.attr('width', xScale.rangeBand());							// not rangeBands- no 's'
 
@@ -57,7 +63,7 @@
 				.text(function(d) { return d; })
 				.attr('x', function(d, i) { return xScale(i) + xScale.rangeBand()/2; })
 				.attr('y', function(d) { return h - yScale(d) + 10; })
-				.attr('fill', 'white')
+				.attr('fill', 'beige')
 				.attr("text-anchor", "middle")
 				.attr('font-family', 'papyrus')
 				.attr('font-size', "11px")
@@ -72,25 +78,43 @@
 					// dataset = [ 11, 12, 15, 20, 18, 17, 16, 18, 23, 25,
      //                5, 10, 13, 19, 21, 25, 22, 18, 15, 13 ];	
 
-					var dataset = [];
+     				var dataset = [];
 
-					var numBars = 20;
-					var barRange = 40;
+					var numBars = 25;
+					var barRange = 100;
 
-					for (i = 0 ; i <= numBars ; i++) {
-						var newNum = (Math.floor(Math.random() * barRange));
-						dataset.push(newNum);
-					}
+						for (i = 0 ; i <= numBars ; i++) {
+							var newNum = Math.floor((Math.random() * barRange));
+							dataset.push(newNum);
+						}
+					// var dataset = [];
+
+					// newDataset();
+					xScale.domain(d3.range(dataset.length));
+					yScale.domain([0, d3.max(dataset)]);
 
                     svg.selectAll('rect')
                     	.data(dataset)
+                    	.transition()								// This is very cool!!! Animates the transition
+                    	.delay(function(d, i ) {					// Staggers the transition
+                    		return i / dataset.length * 100; 
+                    		// return i * 100;						// More data -> longer time (above: scaleable)
+                    	})
+                    	.duration(500)								// Always comes after transition (num) in milisec
+                    	// .ease('circle')							// Controlling flow of transition (elastic, linear, exp, etc)
                     	.attr('y', function(d) { return h - yScale(d); })
                     	.attr('height', function(d) { return yScale(d); })
-						.attr('fill' , function(d) {return "rgb(" + (d * 6) + ", 0, 0)";})
+						.attr('fill' , function(d) {return "rgb(" + (yScale(d)) + ", 0, 0)";})
 						;
 
 					svg.selectAll('text')
 						.data(dataset)
+						.transition()
+                    	.delay(function(d, i) {
+                    		return i / dataset.length * 100;                     		
+                    	})
+						.duration(500)
+                    	// .ease('circle')
 						.text(function(d) { return d; })
 						.attr('y', function(d) { return h - yScale(d) + 10; })
 						;

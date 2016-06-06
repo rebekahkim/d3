@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>D3 Updating Axis Plot</title>
+	<script type="text/javascript" src="d3/d3.js"></script>
+	<style type="text/css">
+		.axis path
+		.axis line {
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}/*
+		circle {
+			fill: #837bff;
+		}*/
+		text {
+			font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+			font-size: 9px;
+			fill: orange;
+		}
+	</style>
+</head>
+
+<body>
+	<p>Click here to update the scatter plot</p>
+	<script type="text/javascript">
+		var h = 300 ;
+		var w = 500 ;
+		var padding = 30;
+
+		var dataset = [];
+
+		var maxRange = Math.random() * 1000;
+		var numDatum = Math.random() * 200;
+
+		for (var i = 0 ; i <= numDatum ; i++) {
+				var xCoor = Math.floor(Math.random() * maxRange);
+				var yCoor = Math.floor(Math.random() * maxRange);
+				dataset.push([xCoor, yCoor]);
+			}
+		// function newDataset() {
+		// 	for (i = 0 ; i <= numDatum ; i++) {
+		// 		var xCoor = Math.floor(Math.random() * maxX);
+		// 		var yCoor = Math.floor(Math.random() * maxY);
+		// 		dataset.push(xCoor, yCoor);
+		// 	}
+		// }
+
+		var xScale = d3.scale.linear()
+						.domain([0, d3.max(dataset, function(d) { return d[0]; })])
+						.range([padding, w - padding])
+						;
+		var yScale = d3.scale.linear()
+						.domain([0, d3.max(dataset, function(d) { return d[1];})])
+						.range([h - padding, padding])
+						;
+		var rScale = d3.scale.linear()
+						.domain([0, d3.max(dataset, function(d) { return d[1];})])
+						.range([2, 5])
+						;
+		var xAxis = d3.svg.axis()
+						.scale(xScale)
+						.orient('bottom')
+						.ticks(5)
+						;
+		var yAxis = d3.svg.axis()
+						.scale(yScale)
+						.orient('left')
+						.ticks(5)
+						;
+		var svg = d3.select('body')
+					.append('svg')
+					.attr('width', w)
+					.attr('height', h)
+					;
+
+
+		svg.selectAll('circle')
+			.data(dataset)
+			.enter()
+			.append('circle')
+			.attr('cx', function(d) {
+				return xScale(d[0]);
+			})
+			.attr('cy', function(d) {
+				return yScale(d[1]);
+			})
+			.attr('r', function(d) {
+				return rScale(d[1]);
+			})
+			;
+
+		svg.append('g')
+			.attr('class', 'x axis')
+			.attr('transform', 'translate(0,' + (h - padding) + ')')
+			.call(xAxis);
+
+		svg.append('g')
+			.attr('class', 'y axis')
+			.attr('transform', 'translate (' + (padding) + ', 0)')
+			.call(yAxis);
+
+		svg.append('clipPath')
+			.attr('id', 'chart-area')
+			.append('rect')
+			.attr('x', padding)
+			.attr('y', padding)
+			.attr('width', w - padding * 2)
+			.attr('height', h - padding * 2)
+			;
+
+		svg.append('g')
+			.attr('id', 'circles')
+			.attr('clip-path', 'url(#chart-area)')
+			.selectAll('circle')
+			.data(dataset)
+			.enter()
+			.append('circle')
+
+
+
+		// svg.selectAll('text')			//<== somehow with the 'text', it messes up the axis labels 
+		// 	.data(dataset)
+		// 	.enter()
+		// 	.append('text')
+		// 	.text(function(d) {
+		// 		return d[0] + ', ' + d[1];
+		// 	})
+		// 	.attr('x', function(d) {
+		// 		return xScale(d[0])
+		// 	})
+		// 	.attr('y', function(d) {
+		// 		return yScale(d[1]);
+		// 	})
+		// 	;
+
+
+		d3.select("p")
+			.on("click", function() {
+
+				dataset = [];
+				var maxRange = Math.random() * 1000;
+
+				for (var i = 0 ; i <= numDatum ; i++) {
+						var xCoor = Math.floor(Math.random() * maxRange);
+						var yCoor = Math.floor(Math.random() * maxRange);
+						dataset.push([xCoor, yCoor]);
+					}
+
+				xScale.domain([0, d3.max(dataset, function(d) { return d[0]; })]);
+				yScale.domain([0, d3.max(dataset, function(d) { return d[1];})]);
+				rScale.domain([0, d3.max(dataset, function(d) { return d[1];})])
+
+				svg.selectAll('circle')
+					.data(dataset)
+					.transition()
+					.duration(1000)
+					.each('start', function() {
+						d3.select(this)								// Setting the current element as 'this'
+							.attr('fill', 'magenta');				// Cannot use .transition() here because only one transition can be active in given 									elemtn- Use .each('start', function() {}) for immediate transformations not transitions
+					})
+					.attr('cx', function(d) {
+						return xScale(d[0]);
+					})
+					.attr('cy', function(d) {
+						return yScale(d[1]);
+					})
+					.attr('r', function(d) {
+						return rScale(d[1]);
+					})
+					.each('end', function(d) {
+						d3.select(this)
+							.transition()						// Unlike 'start', 'end' can use transition
+							.duration(1000)
+							.attr('fill', '#837bff');
+					})
+					;
+
+				// svg.selectAll('text')
+				// 	.data(dataset)
+				// 	.transition()
+				// 	.duration(1000)
+				// 	.text(function(d) {
+				// 		return d[0] + ', ' + d[1];
+				// 	})
+				// 	.attr('x', function(d) {
+				// 		return xScale(d[0])
+				// 	})
+				// 	.attr('y', function(d) {
+				// 		return yScale(d[1]);
+				// 	})
+				// 	;
+
+				svg.select('.x.axis')
+					.transition()
+					.duration(1000)
+					.call(xAxis)
+					;
+
+				svg.select('.y.axis')
+					.transition()
+					.duration(1000)
+					.call(yAxis)
+					;
+			});
+
+
+
+	</script>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
