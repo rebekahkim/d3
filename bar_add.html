@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Updating the Bar Graph</title>
+		<script type="text/javascript" src='d3/d3.js'></script>
+		<style type="text/css">
+			text {
+				fill: beige ;
+				text-anchor :  middle;
+				font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+				font-size: 11px;
+				text-anchor: middle;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<p> Click here to add to the dataset </p>
+
+		<script type="text/javascript">
+			var w = 500;
+			var h = 300;
+
+
+			var numBars = 20;
+			var barRange = 100;
+
+			var dataset = [];
+
+			function newDataset() {
+
+				for (i = 0 ; i <= numBars ; i++) {
+					var newNum = Math.floor((Math.random() * barRange));
+					dataset.push(newNum);
+				}
+			}
+
+			newDataset();
+
+
+			var xScale = d3.scale.ordinal()
+								.domain(d3.range(dataset.length))
+								.rangeRoundBands([0, w], 0.05);			// rangeBands() calculates length '[..]/domain' of bands with 											// 0.05 padding in between
+
+			var yScale = d3.scale.linear()
+								.domain([0, d3.max(dataset)])	// <==
+								.range([0, h]);
+
+			var svg = d3.select('body')
+						.append('svg')
+						.attr('width', w)
+						.attr('height', h);
+
+			svg.selectAll('rect')
+				.data(dataset)
+				.enter()
+				.append('rect')
+				.attr('x', function(d, i ) {
+					return xScale(i);
+				})
+				.attr('y' , function(d) {return h - yScale(d);} )
+				.attr('fill' , function(d) {return "rgb(" + (d) * 3 + ", 0, 0)";})
+				.attr('height', function(d) {return yScale(d);})
+				.attr('width', xScale.rangeBand());							// not rangeBands- no 's'
+
+			svg.selectAll('text')
+				.data(dataset)
+				.enter()
+				.append('text')
+				.text(function(d) { return d; })
+				.attr('x', function(d, i) { return xScale(i) + xScale.rangeBand()/2; })
+				.attr('y', function(d) { return h - yScale(d) + 10; })
+				;
+
+
+			d3.select('p')
+				.on("click", function() {							// Order matters; if the <p> tag is below this, it won't work
+					
+     // 				var dataset = [];
+     // 				var numBars = numBars + 1
+					// var barRange = Math.random() * 100;
+
+					// 	for (i = 0 ; i <= numBars; i++) {
+							var newNum = Math.floor((Math.random() * barRange));
+							dataset.push(newNum);
+						// }
+
+
+					xScale.domain(d3.range(dataset.length));		// <== If these lines are in the bottom, the new bar shows up in the left first 															before showing up in the right
+					yScale.domain([0, d3.max(dataset)])
+
+
+					// Select...
+					var bars = svg.selectAll('rect')
+									.data(dataset);					// data() method can also return selections which is the reference to all elements to 										which data was just bound
+
+					var texts = svg.selectAll('text')
+									.data(dataset);
+
+					// Enter...
+					bars.enter()
+						.append('rect')
+						.attr('x', w)
+						.attr('y', function(d) { return h - yScale(d);})
+						.attr('width', xScale.rangeBand())
+						.attr('height', function(d) { return yScale(d); })
+						.attr('fill' , function(d) {return "rgb(" + (yScale(d)) + ", 0, 0)";})
+						;
+
+					texts.enter()
+						.append('text')
+
+					// Update...
+					bars.transition()
+						.duration(500)
+						.attr('x', function(d, i ) {
+							return xScale(i);
+						})
+						.attr('y' , function(d) {return h - yScale(d);} )
+						.attr('width', xScale.rangeBand())
+						.attr('height', function(d) {return yScale(d);})
+						.attr('fill' , function(d) {return "rgb(" + (d) * 3 + ", 0, 0)";})
+						;
+
+
+					svg.selectAll('text')
+						.transition()
+                    	.delay(function(d, i) {
+                    		return i / dataset.length * 100;                     		
+                    	})
+						.duration(500)
+						.text(function(d) { return d})
+						.attr('x', function(d, i) { return xScale(i) + xScale.rangeBand()/2 })
+						.attr('y', function(d) { return h - yScale(d) + 10; })
+						;
+				});
+
+		</script>	
+		
+
+	</body>
+</html>
+
+
+
+
+
+
+
+

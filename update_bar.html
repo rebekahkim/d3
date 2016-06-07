@@ -72,22 +72,13 @@
 
 
 			d3.select('p')
-				.on("click", function() {							// Order matters; if the <p> tag is below this, it won't work
-					// alert("hey don't do that");
-
-					// dataset = [ 11, 12, 15, 20, 18, 17, 16, 18, 23, 25,
-     //                5, 10, 13, 19, 21, 25, 22, 18, 15, 13 ];	
-
+				.on("click", function() {							
      				var dataset = [];
-
-					var numBars = 25;
-					var barRange = 100;
 
 						for (i = 0 ; i <= numBars ; i++) {
 							var newNum = Math.floor((Math.random() * barRange));
 							dataset.push(newNum);
 						}
-					// var dataset = [];
 
 					// newDataset();
 					xScale.domain(d3.range(dataset.length));
