@@ -58,6 +58,10 @@
 								.domain([0, d3.max(dataset)])	
 								.range([0, h]);
 
+			var colorScale = d3.scale.linear()							// Potentially useful- but need better distribution contrast and need to ROUND!
+							.domain([0, d3.max(dataset)])
+							.range([0, 255]);
+
 
 			var svg = d3.select('body')
 						.append("svg")
