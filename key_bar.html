@@ -1,3 +1,5 @@
+<!-- Overall, unfinished/unpolished work here with not-perfect functionality -->
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -8,8 +10,9 @@
 	</head>
 	
 	<body>
-		<p> Click here to take off one bar on the right </p>
-
+		<p id='remove'> Remove a data value </p>
+		<p id='add'> Add a data value</p>
+		
 		<script type="text/javascript">
 			var w = 500;
 			var h = 300;
@@ -83,79 +86,86 @@
 
 
 
+			var paragraphID = d3.select(this).attr("id");
 
-			d3.select('p')
-				.on("click", function() {							
-					dataset.shift();								// Removes one value from dataset array
+			if (paragraphID == 'remove') {
+				d3.select('p')
+					.on("click", function() {							
+						dataset.shift();								// Removes one value from dataset array
 
-					xScale.domain(d3.range(dataset.length));		
-					yScale.domain([0, d3.max(dataset, function(d) { return d.value; })])
-
-
-					// Select...
-					var bars = svg.selectAll('rect')
-									.data(dataset, key);					// data() method can also return selections which is the reference to all elements to 										which data was just bound
-
-					var texts = svg.selectAll('text')
-									.data(dataset, key)
-									;
+						xScale.domain(d3.range(dataset.length));		
+						yScale.domain([0, d3.max(dataset, function(d) { return d.value; })])
 
 
-					// Enter...
-					bars.enter()
-						.append('rect')
-						.attr('x', 0)
-						.attr('y', function(d) { return h - yScale(d.value);})
-						.attr('width', xScale.rangeBand())
-						.attr('height', function(d) { return yScale(d.value); })
-						.attr('fill' , function(d) {return "rgb(" + (yScale(d.value)) + ", 0, 0)";})
-						;
+						// Select...
+						var bars = svg.selectAll('rect')
+										.data(dataset, key);					// data() method can also return selections which is the reference to all elements to 										which data was just bound
 
-					
-					texts.enter()												// <=== UNFINISHED: need work
-						.append('text')
-						.transition()
-                    	.delay(function(d, i) {
-                    		return i / dataset.length * 100;                     		
-                    	})
-						.duration(500)
-						.text(function(d) { return d.value})
-						.attr('x', function(d, i) { return xScale(i) + xScale.rangeBand()/2 })
-						.attr('y', function(d) { return h - yScale(d.value) + 10; })
-						// .attr('x', function(d, i ) {
-						// 	return xScale(i);
-						// })
-						// .attr('y' , function(d) {return h - yScale(d.value);} )
-						.attr("text-anchor", "middle")
-						;
+						var texts = svg.selectAll('text')
+										.data(dataset, key)
+										;
 
 
-					// Update...
-					bars.transition()
-						.duration(500)
-						.attr('x', function(d, i ) {
-							return xScale(i);
-						})
-						.attr('y' , function(d) {return h - yScale(d.value);} )
-						.attr('width', xScale.rangeBand())
-						.attr('height', function(d) {return yScale(d.value);})
-						.attr('fill' , function(d) {return "rgb(" + (d.value) * 3 + ", 0, 0)";})
-						;
+						// Enter...
+						bars.enter()
+							.append('rect')
+							.attr('x', 0)
+							.attr('y', function(d) { return h - yScale(d.value);})
+							.attr('width', xScale.rangeBand())
+							.attr('height', function(d) { return yScale(d.value); })
+							.attr('fill' , function(d) {return "rgb(" + (yScale(d.value)) + ", 0, 0)";})
+							;
+
+						
+						texts.enter()												// <=== UNFINISHED: need work
+							.append('text')
+							.transition()
+	                    	.delay(function(d, i) {
+	                    		return i / dataset.length * 100;                     		
+	                    	})
+							.duration(500)
+							.text(function(d) { return d.value})
+							.attr('x', function(d, i) { return xScale(i) + xScale.rangeBand()/2 })
+							.attr('y', function(d) { return h - yScale(d.value) + 10; })
+							// .attr('x', function(d, i ) {
+							// 	return xScale(i);
+							// })
+							// .attr('y' , function(d) {return h - yScale(d.value);} )
+							.attr("text-anchor", "middle")
+							;
 
 
-					//Exit...
-					bars.exit()
-						.transition()
-						// .attr('x', w) 
-						.attr('x', -xScale.rangeBand())				// Bars Exit stage left
-						.remove();									//After transition is complete, remove() method delete the select element forever
+						// Update...
+						bars.transition()
+							.duration(500)
+							.attr('x', function(d, i ) {
+								return xScale(i);
+							})
+							.attr('y' , function(d) {return h - yScale(d.value);} )
+							.attr('width', xScale.rangeBand())
+							.attr('height', function(d) {return yScale(d.value);})
+							.attr('fill' , function(d) {return "rgb(" + (d.value) * 3 + ", 0, 0)";})
+							;
 
-					texts.exit()									// Again, order matters, exit text after all the adjustment/transition finish
-						.transition()
-						.attr('x', -xScale.rangeBand())		
-						.remove();
 
-				});
+						//Exit...
+						bars.exit()
+							.transition()
+							// .attr('x', w) 
+							.attr('x', -xScale.rangeBand())				// Bars Exit stage left
+							.remove();									//After transition is complete, remove() method delete the select element forever
+
+						texts.exit()									// Again, order matters, exit text after all the adjustment/transition finish
+							.transition()
+							.attr('x', -xScale.rangeBand())		
+							.remove();
+
+					});
+				}
+			else {
+				// Add Value
+			}
+
 
 		</script>	
 		
