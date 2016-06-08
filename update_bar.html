@@ -4,7 +4,11 @@
 		<meta charset="UTF-8">
 		<title>Updating the Bar Graph</title>
 		<script type="text/javascript" src='d3/d3.js'></script>
-		<style type="text/css"></style>
+		<style type="text/css">
+			svg text {
+				pointer-events: none;						 /*Tells browser that this doesn't trigger any event so ignore like air */
+			}
+		</style>
 	</head>
 	
 	<body>

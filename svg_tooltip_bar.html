@@ -17,11 +17,11 @@
 				fill: orange;
 			}				/* Above rect style guide can be covered in the body script with d3 on() but not preferable because clash with transitions()*/
 			text {
-				/*fill: white ;
+				fill: purple ;
 				text-anchor :  middle;
-				font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
-				font-size: 11px;
-				text-anchor: middle;*/
+				font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+				font-size: 13px;
+				text-anchor: middle;
 			}
 		</style>
 	</head>
@@ -79,11 +79,7 @@
 					svg.append('text')
 						.attr('id', 'tooltip')
 						.attr('x', xPosition)
-						.attr('y', yPosition + 10)				// Don't knw why but tinker with the yPosition here not when variable is set above
-						.attr('font-size', '11px')
-						.attr('font-family', 'papyrus')
-						.attr('fill', 'black')
-					    .attr("text-anchor", "middle")
+						.attr('y', yPosition + 15)				// Don't knw why but tinker with the yPosition here not when variable is set above
 						.text(d)
 						;
 				})
