@@ -8,137 +8,25 @@
 		<meta charset='utf-8'>
 		<title> D3 Interactive Bar graph </title>
 		<script type="text/javascript" src="d3/d3.js"></script>
-		<style type="text/css">	
-			rect {												/* smooth 0.3 sec transition between color change */
-		        -moz-transition: all 0.3s;
-		        -o-transition: all 0.3s;
-		        -webkit-transition: all 0.3s;
-		        transition: all 0.3s;
-			} 
-
-			rect:hover {										
-				fill: orange;
-			}				/* Above rect style guide can be covered in the body script with d3 on() but not preferable because clash with transitions()*/
-			#tooltip {
-				position: absolute;							/* "absolute" lets us control the exact position */
-				width: 200px;
-				height: auto;
-				padding: 10px;
-				background-color: beige;
-				-webkit-border-radius: 10px;
-				-moz-border-radius: 10px;
-		        border-radius: 10px;
-		        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-		        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-		        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-		        pointer-events: none;
-			}
-			#tooltip.hidden{
-				display: none;					/* ensure mouseover tooltip itself won’t trigger a mouseout event on the bars, thus hiding tooltip*/
-			}
-			#tooltip p{
-				margin: 0;
-				font-family: "Lucida Bright", Georgia, serif;
-				font-size: 11px;
-				line-height: 20px;
-			}
-		</style>
+		<style type="text/css"></style>
 	</head>
 	
 	<body>
+
 		<p>Click anywhere on the bars to change sort order</p>
-		<script type="text/javascript">
-			var w = 600;
-			var h = 500;
 
-			var numBars = 20;
-			var barRange = 100;
-
-			var dataset = [];
-
-
-			for (i = 0 ; i <= numBars ; i++) {
-				var newNum = Math.floor((Math.random() * barRange));
-				dataset.push(newNum);
-			}
-
-			var xScale = d3.scale.ordinal()
-								.domain(d3.range(dataset.length))
-								.rangeRoundBands([0, w], 0.05);			// rangeBands() calculates length '[..]/domain' of bands with 															// 0.05 padding in between
-
-			var yScale = d3.scale.linear()
-								.domain([0, d3.max(dataset)])	
-								.range([0, h]);
-
-			var svg = d3.select('body')
-						.append("svg")
-						.attr('width', w)
-						.attr('height', h);
-
-
-			svg.selectAll('rect')			
-				.data(dataset)
-				.enter()
-				.append('rect')
-				.attr('x', function(d, i ) {
-					return xScale(i);
-				})
-				.attr('y' , function(d) {return h - yScale(d);} )
-				.attr('height', function(d) {return yScale(d);})
-				.attr('width', xScale.rangeBand())		
-				.attr('fill' , function(d) {return "rgb(0, 0, " + (d) * 2 + ")";})
-				.on('mouseover', function(d) {
-					var xPosition = parseFloat(d3.select(this).attr('x')) + xScale.rangeBand() / 2;
-					var yPosition = parseFloat(d3.select(this).attr('y'));			// Don't tinker with yposition here; it's futile (see svg txt below)
-
-					// Updating tooltip position and value...
-					d3.select("#tooltip")
-						.style('left', xPosition + "px")
-						.style('top', yPosition + "px")
-						.select('#value')										// <== How does the magic happen here where d is passed to #value??? 																	Can it just insert text between span tags???
-						.text(d);
-					// Show tooltip
-					d3.select("#tooltip").classed("hidden", false);
-				})
-				.on('mouseout', function(d) {
-					d3.select("#tooltip").classed("hidden", true);
-				})
-				.on('click', function() {
-					sortBars();
-				})
-				;
-				
-
-			var sortOrder =	true
-
-			var sortBars = function() {
-				sortOrder = !sortOrder; 							// flips it around
-
-				svg.selectAll('rect')								
-					.sort(function(a, b) {								// sort() passes vars to comparator ftn which takes a,b not d,i
-						if (sortOrder) {
-							return d3.ascending(a, b);						// Need to specify "how" to sort; here, ascending()
-						}
-						else {
-							return d3.descending(a,b);
-						}
-					})
-					.transition()
-					.delay(function(d, i) {
-				        return i * 50;
-					})
-					.duration(1000)
-					.attr('x', function(d, i) {
-						return xScale(i);
-					})
-					;
-			};
-		</script>
 		<div id="tooltip" class="hidden">
 			<p><strong>Important Label Heading</strong></p>
 			<p><span id="value">10000</span> is the value</p>					<!-- <==what is the purpose of 100 here? Doesn't even show in display -->
 		</div>
 
+		
+		
+		
+		<script type="text/javascript" src='js/div_tooltip_bar.js'></script>	<!-- Putting this before <p> yield bars above the text. -->
+		<link rel="stylesheet" type="text/css" href="css/div_tooltip_bar.css"/>
+
+		
 	</body>
 </html>
 
