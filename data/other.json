@@ -1,0 +1,95 @@
+{
+  "name": "root",
+  "children": [
+    { "name": "day",  "havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "unbearable"}
+    ] },
+   { "name": "day", "havePeriod": "No", "bleeding": "break", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "good" }
+    ] },
+    { "name": "day", "havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "manageable"  }
+    ] },
+    { "name": "day","havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "manageable"  }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "good" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "unbearable" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "break", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "good" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "manageable"  }
+    ] },
+    { "name": "day",  "havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "great"}
+    ] },
+   { "name": "day", "havePeriod": "No", "bleeding": "break", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "manageable"  }
+    ] },
+    { "name": "day","havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "manageable"  }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "break", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "good" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "manageable"  }
+    ] },
+    { "name": "day",  "havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "great"}
+    ] },
+   { "name": "day", "havePeriod": "No", "bleeding": "break", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "manageable"  }
+    ] },
+    { "name": "day","havePeriod": "No", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "manageable"  }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "break", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "good" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1,  "howWasDay" "bad" }
+    ] },
+    { "name": "day", "havePeriod": "Yes", "bleeding": "", "children": [
+      { "name": "day", "size": 1, "howWasDay" "good"  }
+    ]}
+  ]
+}
