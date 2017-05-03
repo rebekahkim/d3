@@ -1,0 +1,69 @@
+Sharon R. L. Gorman
+Columbia University department of biomedical informatics (DBMI)
+April 5, 2017
+
+====================================
+Json for creating insights graphic
+====================================
+
+= Description of json:
+The Json has a slot named days. It contains an array of 30 objects.
+Each object represents a day. Each day is numbered (0-29). Day 0 is the starting date while day 29 is 
+the 30th day counting backwards from day 0.
+
+
+
+day object Fields: 
+* dayNb - contains the day in the sequence 0-29
+          a value of 0 is the most recent date. We count backwards, 1 is the 
+          day before the most recent, and so on to day 29, the 30th day. 
+
+* date - is the actual date of the day represented.
+         format: year-month-day
+
+* howWasDay - answer to 'how was your day?'
+               possible values: great,good,manageable,bad,unbearable,blank (if unanswered)
+
+* havePeriod - answer to 'do you have your period?'
+               possible values: yes,no,blank  (if unanswered)
+
+* periodDesc - period description. answer to 'flow' question
+              possible values: heavy_flow, medium_flow, light_flow or blank (if unanswered)
+
+* bleeding - answer to question 'are you bleeding?'
+             possible values: clots,spotting,breakthrough bleeding,blank (if unanswered)
+
+* tracking - count of moments+day questions answered (see below for which questions
+             are included into this sum.
+
+Notes:
+= When calculating tracking (moments+day) the field is_edited is taken into consideration. If a row has
+an is_edited value equal to 1 it is not considered in the moment+day count.
+the following questions are considered in the tracking count: 1,4,6,7,8,25,401,9,10,12,13,14,15,16,24,27,28,34,35
+
+= the answer to question 38 (Flow) is stored in periodDesc, but does not count towards moment+day count
+
+= question titles used for tracking moments+day questions
+ These numbers correspond to the question_survey_id column in the survey_observation
+table.
+
+* list of questions and titles
+1,Where is the pain?
+4,What are you experiencing?
+6,Feeling positive?
+7,Feeling negative?
+8,What kind of bleeding?
+25,What's happening in your gastrointestinal urinary system?
+401,What medication did you take?
+9,How was your day?
+10,What did you do to self-manage?
+12,Did you eat any foods that improve symptoms?
+13,Have any effect?
+14,Did you do any of these exercises that help?
+15,Take any hormones?
+16,How was sex?
+24,Do you have your period?
+27,Something else to note?
+28,Activities
+34,Foods that worsen symptoms
+

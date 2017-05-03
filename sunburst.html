@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> Sunburst </title>
+    <script type="text/javascript" src="d3/d3.js"></script>
+	<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+</head>
+
+<body>
+    <script type="text/javascript">
+    	var dataset;
+
+    	// load JSON
+    	d3.json("/data/test.json", function(data){
+    		// for (var i = data["days"].length - 1; i >= 0; i--) {
+    			// console.log(data["days"][i]);
+    			// dataset.push(data["days"][i]);
+    		// }
+    		console.log(data)
+    		dataset = data; 
+    	});
+
+				
+		const data = {
+		  name: 'root',
+		  children: [
+		    { name: 'day',  havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "unbearable"}
+		    ] },
+		   { name: 'day', havePeriod: "No", bleeding: "break", children: [
+		      { name: 'day1', size: 1,  howWasDay: "good" }
+		    ] },
+		    { name: 'day', havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    ] },
+		    { name: 'day',havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "good" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "unbearable" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "break", children: [
+		      { name: 'day1', size: 1,  howWasDay: "good" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    ] },
+		    { name: 'day',  havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "great"}
+		    ] },
+		   { name: 'day', havePeriod: "No", bleeding: "break", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    ] },
+		    { name: 'day',havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "break", children: [
+		      { name: 'day1', size: 1,  howWasDay: "good" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    ] },
+		    { name: 'day',  havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "great"}
+		    ] },
+		   { name: 'day', havePeriod: "No", bleeding: "break", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    ] },
+		    { name: 'day',havePeriod: "No", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "break", children: [
+		      { name: 'day1', size: 1,  howWasDay: "good" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    ] },
+		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'day1', size: 1, howWasDay: "good"  }
+		    ]}
+		  ]
+		}
+	
+		console.log(data);
+
+		var width = 900,
+		    height = 700,
+		    radius = Math.min(width, height) / 2;
+         
+        var svg = d3.select("body").append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.append("g")
+			.attr("transform", "translate(" + width / 2 + "," + height /2 + ")");
+
+		var partition = d3.layout.partition()
+		    .sort(null)
+		    .size([2 * Math.PI, radius * radius]) // [width, height]
+		    // .value(function(d) { return 1; });
+		    .value(function(d){return d.size});
+
+		var arc = d3.svg.arc()
+			.startAngle(function(d) { return d.x; })
+			.endAngle(function(d) { return d.x + d.dx; })
+			.innerRadius(function(d) { return Math.sqrt(d.y); })
+			.outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
+
+		var g = svg.datum(data)
+			.selectAll('path')
+			.data(partition.nodes)
+			.enter()
+			.append('g')
+			.append('path')
+			.attr('display', function(d){ return d.depth ? null : 'none';})
+			.attr('d', arc)
+			.style('stroke', '#fff')
+			.style('fill', function (d) {
+			    console.log(d);
+				if (typeof d.bleeding !=='undefined' && d.bleeding.length > 0){
+				  return '#ff6666'; // light red
+				}
+				if (typeof d.havePeriod !=='undefined' && d.havePeriod == "Yes") {
+				  return "#4d0000"; // dark red
+				}
+
+				if (typeof d.howWasDay !=='undefined'){
+				  switch (d.howWasDay){
+				      case "unbearable" :
+				        return "#FF0000"
+				      case "bad":
+				        return "#FFFF00"
+				      case "manageable" :
+				        return "#FFA500"
+				      case "good" :
+				        return "#7FFF00"
+				      case "great" :
+				        return "#00FF00"
+				    }
+				}
+
+				return '#e5e5e5'; // null grey
+				});
+
+	</script>	
+</body>
+</html>

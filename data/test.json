@@ -1,0 +1,365 @@
+{
+  "name" : "days",
+  "children" : [
+    {
+      "name" : "day",
+      "dayNb": 0,
+      "date": "2017-04-05",
+      "howWasDay": "great",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 8,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 1,
+      "date": "2017-04-04",
+      "howWasDay": "bad",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 4,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 2,
+      "date": "2017-04-03",
+      "howWasDay": "bad",
+      "havePeriod": "",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 4,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 3,
+      "date": "2017-04-02",
+      "howWasDay": "good",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "spotting",
+      "tracking": 5,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 4,
+      "date": "2017-04-01",
+      "howWasDay": "",
+      "havePeriod": "",
+      "periodDesc": "",
+      "bleeding": "spotting",
+      "tracking": 3,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 5,
+      "date": "2017-03-31",
+      "howWasDay": "manageable",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 10,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 6,
+      "date": "2017-03-30",
+      "howWasDay": "manageable",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 4,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 7,
+      "date": "2017-03-29",
+      "howWasDay": "bad",
+      "havePeriod": "Yes",
+      "periodDesc": "medium_flow",
+      "bleeding": "spotting",
+      "tracking": 16,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 8,
+      "date": "2017-03-28",
+      "howWasDay": "bad",
+      "havePeriod": "Yes",
+      "periodDesc": "medium_flow",
+      "bleeding": "",
+      "tracking": 8,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 9,
+      "date": "2017-03-27",
+      "howWasDay": "bad",
+      "havePeriod": "Yes",
+      "periodDesc": "heavy_flow",
+      "bleeding": "",
+      "tracking": 9,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 10,
+      "date": "2017-03-26",
+      "howWasDay": "bad",
+      "havePeriod": "Yes",
+      "periodDesc": "heavy_flow",
+      "bleeding": "",
+      "tracking": 6,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 11,
+      "date": "2017-03-25",
+      "howWasDay": "unbearable",
+      "havePeriod": "Yes",
+      "periodDesc": "heavy_flow",
+      "bleeding": "",
+      "tracking": 8,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 12,
+      "date": "2017-03-24",
+      "howWasDay": "unbearable",
+      "havePeriod": "Yes",
+      "periodDesc": "heavy_flow",
+      "bleeding": "",
+      "tracking": 12,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 13,
+      "date": "2017-03-23",
+      "howWasDay": "",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 4,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 14,
+      "date": "2017-03-22",
+      "howWasDay": "bad",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 8,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 15,
+      "date": "2017-03-21",
+      "howWasDay": "manageable",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 10,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 16,
+      "date": "2017-03-20",
+      "howWasDay": "bad",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 6,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 17,
+      "date": "2017-03-19",
+      "howWasDay": "manageable",
+      "havePeriod": "",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 3,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 18,
+      "date": "2017-03-18",
+      "howWasDay": "manageable",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 3,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 19,
+      "date": "2017-03-17",
+      "howWasDay": "bad",
+      "havePeriod": "",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 13,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 20,
+      "date": "2017-03-16",
+      "howWasDay": "manageable",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 5,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 21,
+      "date": "2017-03-15",
+      "howWasDay": "bad",
+      "havePeriod": "",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 11,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 22,
+      "date": "2017-03-14",
+      "howWasDay": "bad",
+      "havePeriod": "",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 3,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 23,
+      "date": "2017-03-13",
+      "howWasDay": "bad",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 6,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 24,
+      "date": "2017-03-12",
+      "howWasDay": "unbearable",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 4,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 25,
+      "date": "2017-03-11",
+      "howWasDay": "bad",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 3,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 26,
+      "date": "2017-03-10",
+      "howWasDay": "manageable",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 3,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 27,
+      "date": "2017-03-09",
+      "howWasDay": "manageable",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 2,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 28,
+      "date": "2017-03-08",
+      "howWasDay": "manageable",
+      "havePeriod": "No",
+      "periodDesc": "",
+      "bleeding": "",
+      "tracking": 3,
+      "children" : [
+        {"name" : "day1", "size" : 1}]
+    },
+    {
+      "name" : "day",
+      "dayNb": 29,
+      "date": "2017-03-07",
+      "howWasDay": "manageable",
+      "havePeriod": "Yes",
+      "periodDesc": "medium_flow",
+      "bleeding": "breakthrough_bleeding",
+      "tracking": 11,
+    "children" : [
+      {"name" : "day1", "size" : 1}]
+    }
+  ]
+}
