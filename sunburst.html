@@ -11,115 +11,133 @@
     <script type="text/javascript">
     	var dataset;
 
-    	// load JSON
-    	d3.json("/data/test.json", function(data){
-    		// for (var i = data["days"].length - 1; i >= 0; i--) {
-    			// console.log(data["days"][i]);
-    			// dataset.push(data["days"][i]);
-    		// }
-    		console.log(data)
+    	// PROBLEM: parsing JSON file
+    	d3.json("/data/insights.json", function(data){
     		dataset = data; 
     	});
 
-				
-		const data = {
+ 		// Sunburst takes hierarchal data
+		// so the insights.JSON file format should be the following:		
+		var data = {
+		  // root
 		  name: 'root',
 		  children: [
-		    { name: 'day',  havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "unbearable"}
+		  	// First Ring- Period and Bleeding
+		    { dayNb: 0, name: 'blood',  havePeriod: "No", bleeding: "", children: [
+		      // Second Ring- How was your day
+		      { name: 'howdy', size: 1, howWasDay: "unbearable", children: [
+		      	// Outer Rings- number of tracking- hierarchal 
+		      	// So the total number of rings (depth), per day, there will be 2 inner rings (blood, howWasDay) + number of tracking
+		      	{ name: 'track1', size: 1, children: [
+		      		{ name: 'track2', size: 1, children: [
+		      			// this day has 3 trackings 
+		      			{name: 'track3', size: 1}
+		      		]}
+		      	]}
+		      ]}
 		    ] },
-		   { name: 'day', havePeriod: "No", bleeding: "break", children: [
-		      { name: 'day1', size: 1,  howWasDay: "good" }
+		   { dayNb: 1, name: 'blood', havePeriod: "No", bleeding: "break", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "good" }
 		    ] },
-		    { name: 'day', havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    { dayNb: 2, name: 'blood', havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "manageable"  }
 		    ] },
-		    { name: 'day',havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    { dayNb: 3, name: 'blood',havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "manageable", children: [
+		      	{naem : 'track1' , size: 1}
+		      ] }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "good" }
+		    { dayNb: 4, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "good" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "unbearable" }
+		    { dayNb: 5, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "unbearable" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "break", children: [
-		      { name: 'day1', size: 1,  howWasDay: "good" }
+		    { dayNb: 6, name: 'blood', havePeriod: "Yes", bleeding: "break", children: [
+		      { name: 'howdy', size: 1, howWasDay: "unbearable", children: [
+		      	{ name: 'track1', size:1}
+		      ]}
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 7, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 8, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    { dayNb: 9, name: 'blood', havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "manageable"  }
 		    ] },
-		    { name: 'day',  havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "great"}
+		    { dayNb: 10, name: 'blood',  havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "great"}
 		    ] },
-		   { name: 'day', havePeriod: "No", bleeding: "break", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		   { dayNb: 11, name: 'blood', havePeriod: "No", bleeding: "break", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    { dayNb: 12, name: 'blood', havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "manageable"  }
 		    ] },
-		    { name: 'day',havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    { dayNb: 13, name: 'blood',havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "manageable"  }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 14, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 15, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "break", children: [
-		      { name: 'day1', size: 1,  howWasDay: "good" }
+		    { dayNb: 16, name: 'blood', havePeriod: "Yes", bleeding: "break", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "good" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 17, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 18, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad", children: [
+		      	{name : 'track1', size: 1, children: [
+		      		{name : 'track 2', size: 1, children: [
+		      			{name : 'track 3', size : 1}
+		      		]}
+		      	]}
+		      ] }
 		    ] },
-		    { name: 'day', havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    { dayNb: 19, name: 'blood', havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "manageable"  }
 		    ] },
-		    { name: 'day',  havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "great"}
+		    { dayNb: 20, name: 'blood',  havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "great"}
 		    ] },
-		   { name: 'day', havePeriod: "No", bleeding: "break", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		   { dayNb: 21, name: 'blood', havePeriod: "No", bleeding: "break", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    { dayNb: 22, name: 'blood', havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "manageable"  }
 		    ] },
-		    { name: 'day',havePeriod: "No", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "manageable"  }
+		    { dayNb: 23, name: 'blood',havePeriod: "No", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "manageable"  }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 24, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 25, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "break", children: [
-		      { name: 'day1', size: 1,  howWasDay: "good" }
+		    { dayNb: 26, name: 'blood', havePeriod: "Yes", bleeding: "break", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "good" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 27, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1,  howWasDay: "bad" }
+		    { dayNb: 28, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1,  howWasDay: "bad" }
 		    ] },
-		    { name: 'day', havePeriod: "Yes", bleeding: "", children: [
-		      { name: 'day1', size: 1, howWasDay: "good"  }
+		    { dayNb: 29, name: 'blood', havePeriod: "Yes", bleeding: "", children: [
+		      { name: 'howdy', size: 1, howWasDay: "good"  }
 		    ]}
 		  ]
 		}
 	
-		console.log(data);
 
+		// PROBLEM: need to adjust frame dynamically depending on device (iPhone 5, 6, iPad, etc) display size
 		var width = 900,
 		    height = 700,
 		    radius = Math.min(width, height) / 2;
@@ -133,14 +151,30 @@
 		var partition = d3.layout.partition()
 		    .sort(null)
 		    .size([2 * Math.PI, radius * radius]) // [width, height]
-		    // .value(function(d) { return 1; });
 		    .value(function(d){return d.size});
 
 		var arc = d3.svg.arc()
-			.startAngle(function(d) { return d.x; })
-			.endAngle(function(d) { return d.x + d.dx; })
-			.innerRadius(function(d) { return Math.sqrt(d.y); })
-			.outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
+            .startAngle(function(d) { return d.x; })
+            .endAngle(function(d) { return d.x + d.dx; })
+            // .innerRadius(function(d) { return Math.sqrt(d.y); })
+			// .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
+            .innerRadius(function(d) {
+            	// Make innermost ring thinner
+            	// dx, dy are offset x, y position
+            	// console.log("depth: " + d.depth + " x: " +d.x)
+            	// console.log("depth: " + d.depth + " y: " +d.y)            	
+            	// console.log("depth: " + d.depth + " dx: " +d.dx)
+            	// console.log("depth: " + d.depth + " dy: " +d.dy)
+		        if (d.depth == 1){return Math.sqrt(d.y / 2);}
+		        if (d.depth == 2) {return Math.sqrt(d.y /3);}
+		        return Math.sqrt(d.y);
+		    })
+            .outerRadius(function(d) {
+				if (d.depth == 1){return Math.sqrt((d.y+d.dy))}
+		        if (d.depth == 2){return Math.sqrt(d.y +d.dy)}
+		        return Math.sqrt(d.y + d.dy);
+		        }
+		    );
 
 		var g = svg.datum(data)
 			.selectAll('path')
@@ -150,17 +184,20 @@
 			.append('path')
 			.attr('display', function(d){ return d.depth ? null : 'none';})
 			.attr('d', arc)
-			.style('stroke', '#fff')
+			.style('stroke', '#fff') // line separating blocks
 			.style('fill', function (d) {
-			    console.log(d);
-				if (typeof d.bleeding !=='undefined' && d.bleeding.length > 0){
-				  return '#ff6666'; // light red
-				}
-				if (typeof d.havePeriod !=='undefined' && d.havePeriod == "Yes") {
-				  return "#4d0000"; // dark red
+			    // First Ring- bleeding
+				if (d.depth == 1){  
+					if (d.bleeding.length > 0){
+						return '#ff6666'; // light red
+					}
+					if (d.havePeriod == "Yes"){
+						return "#4d0000"; // dark red
+					}
 				}
 
-				if (typeof d.howWasDay !=='undefined'){
+				// Second Ring- how was day
+				if (d.depth == 2){
 				  switch (d.howWasDay){
 				      case "unbearable" :
 				        return "#FF0000"
@@ -175,7 +212,11 @@
 				    }
 				}
 
-				return '#e5e5e5'; // null grey
+				// Outer Rings- how many tracked
+				if (d.depth > 2) { return "#b1d0ca"}
+
+				// No data (null color)
+				return '#e5e5e5'; // grey
 				});
 
 	</script>	
